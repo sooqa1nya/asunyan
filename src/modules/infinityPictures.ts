@@ -44,7 +44,7 @@ const getPictures = async () => {
 
 export const infinityPictures = async (client: Client<boolean>) => {
 
-    const channel = client.channels.cache.get(process.env.cutePictures as string);
+    const channel = client.channels.cache.get(<string>process.env.cutePictures);
     if (!channel || !channel?.isTextBased()) {
         return;
     }
@@ -58,7 +58,7 @@ export const infinityPictures = async (client: Client<boolean>) => {
 
         channel.send({ files: [picture] });
 
-        await sleep(process.env.timer as string);
+        await sleep(<string>process.env.timer);
 
     }
 
