@@ -1,0 +1,19 @@
+{
+  "name": "asunyan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.12.1",
+    "dotenv": "^16.4.5",
+    "nekos.life": "^3.0.0",
+    "typescript": "^5.4.2"
+  }
+}
