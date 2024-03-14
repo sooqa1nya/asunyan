@@ -9,7 +9,7 @@ const nekoClient = new client();
 
 const getPictures = async () => {
 
-    const randomNumber = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    const randomNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 
 
     let nekoMethod;
@@ -24,6 +24,18 @@ const getPictures = async () => {
         }
         case 3: {
             nekoMethod = await nekoClient.foxGirl();
+            break;
+        }
+        case 4: {
+            nekoMethod = await nekoClient.hug();
+            break;
+        }
+        case 5: {
+            nekoMethod = await nekoClient.cuddle();
+            break;
+        }
+        case 6: {
+            nekoMethod = await nekoClient.kiss();
             break;
         }
     }
