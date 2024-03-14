@@ -74,8 +74,6 @@ client.on(Events.InteractionCreate, async interaction => {
         const callback = async (oldState: AudioPlayerState, newState: AudioPlayerState) => {
 
             if (newState.status === 'idle') {
-                await sleep('10s');
-
                 connection.destroy();
             }
 
