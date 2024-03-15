@@ -1,6 +1,4 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
-import { createAudioResource, createAudioPlayer, joinVoiceChannel, AudioPlayerState } from '@discordjs/voice';
-import ytdl from 'ytdl-core';
 
 import { infinityPictures } from './modules/infinityPictures';
 import { loadCMD } from './commands';

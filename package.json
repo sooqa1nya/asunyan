@@ -11,12 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/voice": "^0.16.1",
     "discord.js": "^14.12.1",
     "dotenv": "^16.4.5",
     "nekos.life": "^3.0.0",
-    "tweetnacl": "^1.0.3",
-    "typescript": "^5.4.2",
-    "ytdl-core": "^4.11.5"
+    "typescript": "^5.4.2"
   }
 }

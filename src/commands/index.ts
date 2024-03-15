@@ -1,4 +1,4 @@
-import { REST, Routes, SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js';
+import { REST, Routes, SlashCommandBuilder } from 'discord.js';
 
 
 export const loadCMD = async () => {
