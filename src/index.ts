@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits, GuildMember } from 'discord.js';
+import { Client, Events, GatewayIntentBits } from 'discord.js';
 
 import { infinityPictures } from './modules/infinityPictures';
 import { loadCMD } from './commands';
