@@ -1,15 +1,17 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, Events, GatewayIntentBits, GuildMember } from 'discord.js';
 
 import { infinityPictures } from './modules/infinityPictures';
 import { loadCMD } from './commands';
 
 import 'dotenv/config';
+import { sleep } from './modules/sleep';
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildVoiceStates
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMembers
     ]
 });
 
@@ -30,6 +32,18 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.commandName === 'hi') {
         await interaction.reply('Hi!)');
     }
+
+});
+
+client.on(Events.GuildMemberAdd, async member => {
+
+    const role = member.guild.roles.cache.find(role => role.name === 'Member');
+
+    if (!role) {
+        return;
+    }
+
+    await member.roles.add(role);
 
 });
 
