@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js';
 
 import { infinityPictures } from './modules/infinityPictures';
 import { loadCMD } from './commands';
@@ -44,6 +44,43 @@ client.on(Events.GuildMemberAdd, async member => {
     }
 
     await member.roles.add(role);
+
+    const chatLog = process.env.chatLog;
+
+    if (chatLog) {
+
+        const channel = client.channels.cache.get(chatLog);
+        if (!channel?.isTextBased()) {
+            return;
+        }
+
+        const embed = new EmbedBuilder()
+            .setColor('Green')
+            .setTitle('Join')
+            .setDescription(`${member.user.globalName} (<@${member.user.id}>)`);
+
+        await channel.send({ embeds: [embed] });
+
+    }
+
+});
+
+client.on(Events.GuildMemberRemove, async member => {
+
+    const chatLog = process.env.chatLog;
+    if (!chatLog) return;
+
+    const channel = client.channels.cache.get(chatLog);
+    if (!channel?.isTextBased()) {
+        return;
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('Red')
+        .setTitle('Leave')
+        .setDescription(`${member.user.globalName} (<@${member.user.id}>)`);
+
+    await channel.send({ embeds: [embed] });
 
 });
 

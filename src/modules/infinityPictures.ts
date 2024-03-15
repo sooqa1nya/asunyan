@@ -57,7 +57,7 @@ const getPictures = async () => {
 export const infinityPictures = async (client: Client<boolean>) => {
 
     const channel = client.channels.cache.get(<string>process.env.cutePictures);
-    if (!channel || !channel?.isTextBased()) {
+    if (!channel?.isTextBased()) {
         return;
     }
 
