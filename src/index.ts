@@ -4,7 +4,7 @@ import { infinityPictures } from './modules/infinityPictures';
 import { loadCMD } from './commands';
 
 import 'dotenv/config';
-import { sleep } from './modules/sleep';
+
 
 const client = new Client({
     intents: [
