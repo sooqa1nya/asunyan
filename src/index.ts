@@ -1,7 +1,6 @@
-import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js';
+import { Client, Events, GatewayIntentBits } from 'discord.js';
 
-import { infinityPictures } from './modules/infinityPictures';
-import { loadCMD } from './commands';
+import { clientReady, interactions, memberAdd, memberJoin, memberRemove } from './handlers';
 
 import 'dotenv/config';
 
@@ -16,73 +15,18 @@ const client = new Client({
 });
 
 
-client.once(Events.ClientReady, async readyClient => {
+// Client is ready
+client.once(Events.ClientReady, clientReady);
 
-    console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+// Commands
+client.on(Events.InteractionCreate, interactions);
 
-    await loadCMD();
-    await infinityPictures(client);
+// Role
+client.on(Events.GuildMemberAdd, memberJoin);
 
-});
-
-client.on(Events.InteractionCreate, async interaction => {
-
-    if (!interaction.isChatInputCommand()) return;
-
-    if (interaction.commandName === 'hi') {
-        await interaction.reply('Hi!)');
-    }
-
-});
-
-client.on(Events.GuildMemberAdd, async member => {
-
-    const role = member.guild.roles.cache.find(role => role.name === 'Member');
-
-    if (!role) {
-        return;
-    }
-
-    await member.roles.add(role);
-
-    const chatLog = process.env.chatLog;
-
-    if (chatLog) {
-
-        const channel = client.channels.cache.get(chatLog);
-        if (!channel?.isTextBased()) {
-            return;
-        }
-
-        const embed = new EmbedBuilder()
-            .setColor('Green')
-            .setTitle('Join')
-            .setDescription(`${member.user.globalName} (<@${member.user.id}>)`);
-
-        await channel.send({ embeds: [embed] });
-
-    }
-
-});
-
-client.on(Events.GuildMemberRemove, async member => {
-
-    const chatLog = process.env.chatLog;
-    if (!chatLog) return;
-
-    const channel = client.channels.cache.get(chatLog);
-    if (!channel?.isTextBased()) {
-        return;
-    }
-
-    const embed = new EmbedBuilder()
-        .setColor('Red')
-        .setTitle('Leave')
-        .setDescription(`${member.user.globalName} (<@${member.user.id}>)`);
-
-    await channel.send({ embeds: [embed] });
-
-});
+// Logs
+client.on(Events.GuildMemberAdd, memberAdd);
+client.on(Events.GuildMemberRemove, memberRemove);
 
 
 client.login(process.env.botToken);
